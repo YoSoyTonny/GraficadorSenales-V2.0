@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GraficadorSeñales"
         mc:Ignorable="d"
         Title="MainWindow" Height="1304.55" Width="1071.5">
-    <Grid HorizontalAlignment="Left" Width="1062" Height="1261" VerticalAlignment="Top">
+    <Grid HorizontalAlignment="Left" Width="1062" Margin="0,0,0,2">
         <TextBlock HorizontalAlignment="Left" Margin="8,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="Tiempo inicial:"/>
         <TextBox x:Name="txtTiempoInicial" HorizontalAlignment="Left" Height="23" Margin="8,34,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="94"/>
         <TextBlock HorizontalAlignment="Left" Margin="107,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Text="Tiempo final:"/>
@@ -57,20 +57,20 @@
         <TextBlock HorizontalAlignment="Left" Margin="205,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Height="17"><Run Text="Umbral"/><Run Text=":"/><LineBreak/><Run/></TextBlock>
         <TextBox x:Name="txtUmbral_SegundaSeñal" HorizontalAlignment="Left" Height="23" Margin="205,217,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="70" IsEnabled="False" />
         <CheckBox x:Name="cbUmbral_SegundaSeñal" Content="&#xA;" HorizontalAlignment="Left" Margin="280,217,0,0" VerticalAlignment="Top" Click="cbUmbral_Checked"/>
-        <ScrollViewer x:Name="scrContenedor_Copy" HorizontalAlignment="Left" Height="538" Margin="501,544,0,-557" VerticalAlignment="Top" Width="556" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" >
+        <ScrollViewer x:Name="scrContenedor_Resultado" HorizontalAlignment="Left" Height="538" Margin="501,544,0,-557" VerticalAlignment="Top" Width="556" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" >
             <Grid>
                 <Polyline Stroke="Aqua" StrokeThickness="2" x:Name="plnGraficaResultado" />
-                
+
                 <Polyline Stroke="Black" StrokeThickness="1" x:Name="plnEjeXResultado" />
                 <Polyline Stroke="Black" StrokeThickness="1" x:Name="plnEjeYResultado" />
             </Grid>
         </ScrollViewer>
-        <TextBlock x:Name="lblAmplitudMaximaY_Copy" HorizontalAlignment="Left" Margin="455,555,0,-46" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="46"/>
-        <TextBlock x:Name="lblAmplitudMaximaNegativaY_Copy" HorizontalAlignment="Left" Margin="450,1033,0,-524" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="3.787,0.376" Width="46"/>
-        <TextBlock x:Name="lblAmplitudCero_Copy" HorizontalAlignment="Left" Margin="475,791,0,-288" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="21" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="16,764,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="96"><Run Text="O"/><Run Text="peración "/></TextBlock>
-        <Button x:Name="btnRealizarOperacion" Content="Realizar Operacion" HorizontalAlignment="Left" Margin="15,808,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="cbTipoOperacion" HorizontalAlignment="Left" Margin="15,783,0,0" VerticalAlignment="Top" Width="120">
+        <TextBlock x:Name="lblAmplitudMaximaY_Resultado" HorizontalAlignment="Left" Margin="455,555,0,-46" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="46"/>
+        <TextBlock x:Name="lblAmplitudMaximaNegativaY_Resultado" HorizontalAlignment="Left" Margin="450,1033,0,-524" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="3.787,0.376" Width="46"/>
+        <TextBlock x:Name="lblAmplitudCero_Resultado" HorizontalAlignment="Left" Margin="475,791,0,-288" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="21" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="336,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="96"><Run Text="O"/><Run Text="peración "/></TextBlock>
+        <Button x:Name="btnRealizarOperacion" Content="Realizar Operacion" HorizontalAlignment="Left" Margin="335,214,0,0" VerticalAlignment="Top" Width="120" Click="btnRealizarOperacion_Click"/>
+        <ComboBox x:Name="cbTipoOperacion" HorizontalAlignment="Left" Margin="335,190,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem >suma</ComboBoxItem>
             <ComboBoxItem >Multiplicacion</ComboBoxItem>
         </ComboBox>

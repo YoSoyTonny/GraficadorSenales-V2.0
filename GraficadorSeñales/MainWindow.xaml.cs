@@ -10,6 +10,9 @@ namespace GraficadorSeñales
     public partial class MainWindow : Window
     {
         double amplitudMaxima = 1;
+        Señal señal;
+        Señal segundaSeñal;
+        Señal señalResultado;
 
         public MainWindow()
         {
@@ -325,7 +328,67 @@ namespace GraficadorSeñales
                 txtUmbral.IsEnabled = false;
             }
         }
-        
+
+        private void btnRealizarOperacion_Click(object sender, RoutedEventArgs e)
+        {
+            señalResultado = null;
+            switch(cbTipoOperacion.SelectedIndex)
+                {
+                case 0: //Suma//
+                    señalResultado = Señal.sumar(señal, segundaSeñal);
+                    break;
+                case 1: //Multiplicar
+                    break;
+                case 2: 
+                    break;
+
+                }
+
+            señalResultado.actualizarAmplitudMaxima();
+
+            plnGraficaResultado.Points.Clear();
+
+            amplitudMaxima = señal.AmplitudMaxima;
+            if (segundaSeñal.AmplitudMaxima > amplitudMaxima)
+            {
+                amplitudMaxima = segundaSeñal.AmplitudMaxima;
+            }
+
+            plnGrafica.Points.Clear();
+            plnGrafica2.Points.Clear();
+
+
+            lblAmplitudMaximaY_Resultado.Text = amplitudMaxima.ToString("F");
+            lblAmplitudMaximaNegativaY_Resultado.Text = "-" + señalResultado.AmplitudMaxima.ToString("F");
+
+            if (señalResultado != null)
+            {
+                //Recorre todos los elementos de una coleccion o arreglo
+                foreach (Muestra muestra in señal.Muestras)
+                {
+                    plnGraficaResultado.Points.Add(new Point((muestra.X - señalResultado.TiempoInicial) * scrContenedor_Resultado.Width, (muestra.Y /
+                        señalResultado.AmplitudMaxima * ((scrContenedor.Height / 2.0) - 30) * -1) +
+                        (scrContenedor_Resultado.Height / 2)));
+
+                }
+            }
+
+            plnEjeXResultado.Points.Clear();
+            //Punto del principio
+            plnEjeXResultado.Points.Add(new Point(0, (scrContenedor_Resultado.Height / 2)));
+            //Punto del final
+            plnEjeXResultado.Points.Add(new Point((señalResultado.TiempoFinal - señalResultado.TiempoInicial) * scrContenedor.Width,
+                (scrContenedor_Resultado.Height / 2)));
+
+            plnEjeYResultado.Points.Clear();
+            //Punto del principio
+            plnEjeYResultado.Points.Add(new Point((0 - señalResultado.TiempoInicial) * scrContenedor_Resultado.Width, (señal.AmplitudMaxima *
+                ((scrContenedor_Resultado.Height / 2.0) - 30) * -1) + (scrContenedor.Height / 2)));
+            //Punto del final
+            plnEjeYResultado.Points.Add(new Point((0 - señalResultado.TiempoFinal) * scrContenedor_Resultado.Width, (-señal.AmplitudMaxima *
+                ((scrContenedor_Resultado.Height / 2.0) - 30) * -1) + (scrContenedor_Resultado.Height / 2)));
+
+        }
+    }
     }
 
-}

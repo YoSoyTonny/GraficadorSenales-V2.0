@@ -91,10 +91,27 @@ namespace GraficadorSeñales
 
             }
 
-        } 
+        }
 
+        //....................Suma de señales......................//
         public static Señal sumar(Señal sumando1, Señal sumando2)
         {
+            SeñalPersonalizada resultado = new SeñalPersonalizada();
+            resultado.TiempoInicial = sumando1.TiempoInicial;
+            resultado.TiempoFinal = sumando1.TiempoFinal;
+            resultado.FrecuenciaMuestreo = sumando1.FrecuenciaMuestreo;
+
+            int indice = 0;
+            foreach (Muestra muestra in sumando1.Muestras)
+            {
+                Muestra muestraResultado = new Muestra();
+                muestraResultado.X = muestra.X;
+                muestraResultado.Y = muestra.Y + sumando2.Muestras[indice].Y;
+                indice++;
+                resultado.Muestras.Add(muestraResultado);
+            }
+
+
 
             return null;
         }
