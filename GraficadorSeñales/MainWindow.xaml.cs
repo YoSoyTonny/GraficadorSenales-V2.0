@@ -30,9 +30,6 @@ namespace GraficadorSeñales
             double umbral = double.Parse(txtUmbral.Text);
             double umbral_segundaSeñal = double.Parse(txtUmbral_SegundaSeñal.Text);
 
-            Señal señal;
-            Señal segundaSeñal;
-
             //PRIMERA SEÑAL
             switch (cbTipoSeñal.SelectedIndex)
             {
@@ -338,6 +335,7 @@ namespace GraficadorSeñales
                     señalResultado = Señal.sumar(señal, segundaSeñal);
                     break;
                 case 1: //Multiplicar
+                    señalResultado = Señal.multiplicar(señal, segundaSeñal);
                     break;
                 case 2: 
                     break;
@@ -348,23 +346,14 @@ namespace GraficadorSeñales
 
             plnGraficaResultado.Points.Clear();
 
-            amplitudMaxima = señal.AmplitudMaxima;
-            if (segundaSeñal.AmplitudMaxima > amplitudMaxima)
-            {
-                amplitudMaxima = segundaSeñal.AmplitudMaxima;
-            }
-
-            plnGrafica.Points.Clear();
-            plnGrafica2.Points.Clear();
-
-
             lblAmplitudMaximaY_Resultado.Text = amplitudMaxima.ToString("F");
             lblAmplitudMaximaNegativaY_Resultado.Text = "-" + señalResultado.AmplitudMaxima.ToString("F");
+
 
             if (señalResultado != null)
             {
                 //Recorre todos los elementos de una coleccion o arreglo
-                foreach (Muestra muestra in señal.Muestras)
+                foreach (Muestra muestra in señalResultado.Muestras)
                 {
                     plnGraficaResultado.Points.Add(new Point((muestra.X - señalResultado.TiempoInicial) * scrContenedor_Resultado.Width, (muestra.Y /
                         señalResultado.AmplitudMaxima * ((scrContenedor.Height / 2.0) - 30) * -1) +
@@ -385,7 +374,7 @@ namespace GraficadorSeñales
             plnEjeYResultado.Points.Add(new Point((0 - señalResultado.TiempoInicial) * scrContenedor_Resultado.Width, (señal.AmplitudMaxima *
                 ((scrContenedor_Resultado.Height / 2.0) - 30) * -1) + (scrContenedor.Height / 2)));
             //Punto del final
-            plnEjeYResultado.Points.Add(new Point((0 - señalResultado.TiempoFinal) * scrContenedor_Resultado.Width, (-señal.AmplitudMaxima *
+            plnEjeYResultado.Points.Add(new Point((0 - señalResultado.TiempoInicial) * scrContenedor_Resultado.Width, (-señal.AmplitudMaxima *
                 ((scrContenedor_Resultado.Height / 2.0) - 30) * -1) + (scrContenedor_Resultado.Height / 2)));
 
         }
