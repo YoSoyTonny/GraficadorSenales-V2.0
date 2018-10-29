@@ -115,6 +115,8 @@ namespace GraficadorSeñales
 
             return resultado;
         }
+
+        //......................Multiplicacion de señales.................//
         public static Señal multiplicar(Señal multiplica1, Señal multiplica2)
         {
             SeñalPersonalizada resultado = new SeñalPersonalizada();
@@ -136,6 +138,49 @@ namespace GraficadorSeñales
 
             return resultado;
         }
+
+        public static Señal convulcionar(Señal operando1, Señal operando2)
+        {
+            SeñalPersonalizada resultado = new SeñalPersonalizada();
+
+            resultado.TiempoInicial = operando1.TiempoInicial + operando2.TiempoInicial;
+
+            resultado.TiempoFinal = operando1.TiempoFinal + operando2.TiempoFinal;
+
+            resultado.FrecuenciaMuestreo = operando1.FrecuenciaMuestreo;
+
+            double periodoMuestreo = 1 / resultado.FrecuenciaMuestreo;
+
+            double duracionSeñal = resultado.TiempoFinal - resultado.TiempoInicial;
+
+            double cantidadMuestrasResultado = duracionSeñal * resultado.FrecuenciaMuestreo;
+
+            double InstanteActual = resultado.TiempoInicial;
+
+            for (int n = 0; n < cantidadMuestrasResultado; n++)
+            {
+                double ValorMuestra = 0;
+                for (int k = 0; k < operando2.Muestras.Count; k++)
+                {
+                    if ((n - k) >= 0 && (n-k) < operando2.Muestras.Count)
+                    {
+                      ValorMuestra +=
+                      operando1.Muestras[k].Y * operando2.Muestras[n - k].Y;
+                    }
+                }
+                Muestra muestra = new Muestra(InstanteActual, ValorMuestra);
+                resultado.Muestras.Add(muestra);
+                InstanteActual += periodoMuestreo;
+            }
+
+
+
+            return resultado;
         }
 
+    
+    }
+
 }
+
+
